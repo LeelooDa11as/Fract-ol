@@ -3,6 +3,10 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <limits.h>
+# include <math.h>
+# include "Libft/libft.h"
+# include "minilibx/mlx.h"
 # include <stdlib.h>
 
 #endif

@@ -11,38 +11,37 @@
 # **************************************************************************** #
 
 
-SRCS = main.c 
+SRCS = main.c
 
 OBJS = ${SRCS:.c=.o}
 
 HEADER = fractol.h
-INCS = -I ./Libft -I./minilibx
+INCS = -I ./Libft -I ./minilibx
 LIBS = -LLibft -lft -Lminilibx -lmlx
+
 #LIBS = -L./ -lft -L./ -lmlx
 NAME = fractol
 CC = gcc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
+MNLXFLAGS = -framework OpenGL -framework AppKit
 
 all:        ${NAME}
 
 ./Libft/libft.a :
-			echo WOLOLOOO
 			make -C ./Libft
 ./minilibx/libmlx.a : 
-			echo kokou
 			make -C ./minilibx 2> /dev/null
 #main.o: main.c	Makefile ${HEADER} ./Libft/libft.a ./minilibx/libmlx.a 
-#	echo OBJECTS
 #	${CC} ${CFLAGS} ${INCS} -c $< -o $@ #${<:.c=.o}
 %.o: %.c	Makefile ${HEADER} ./Libft/libft.a ./minilibx/libmlx.a 
 	echo OBJECTS
-	${CC} ${CFLAGS} ${INCS} -c $< -o $@ #${<:.c=.o}
+	${CC} ${INCS} -c $< -o $@ #${<:.c=.o}
 
 
 ${NAME}:	${OBJS}
 	echo NAME
-	${CC} ${CFLAGS} ${LIBS} ${OBJS} -o ${NAME} #hello you
+	${CC}  ${LIBS} ${OBJS} ${MNLXFLAGS} -o ${NAME}
 clean:
 			${RM} ${OBJS}
 			make -C ./Libft clean

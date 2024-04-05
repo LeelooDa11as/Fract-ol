@@ -9,5 +9,11 @@
 # include "minilibx/mlx.h"
 # include <stdlib.h>
 
-#endif
+typedef struct s_cmpx
+{
+	double	re;
+	double	im;
 
+}	t_cmpx;
+
+#endif

@@ -109,3 +109,25 @@ int	main(void)
 	return (0);
 }
 */
+
+int main(int argc, char *argv[])
+{
+	t_mlx	fractal;
+
+	if (argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 10)
+		|| argc == 4 && !ft_strncmp(argv[1], "julia", 5))
+	{
+		fractal.name = argv[1];
+		printf("fractal name is -->%s\n", fractal.name);
+
+	}
+	else
+	{
+		if (argc == 2 && !ft_strncmp(argv[1], "julia", 5))
+			ft_putstr_fd("Please enter enter the 2 numbers if you choose julia", 2);
+		else
+			ft_putstr_fd("Please enter one of the following:\n1. mandelbrot\n2. julia with 2 numbers ", 2);
+		exit (0); // Exit failure
+	}
+	return (0);
+}

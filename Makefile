@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kkoval <kkoval@student.42barcelon>         +#+  +:+       +#+         #
+#    By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/31 20:52:37 by kkoval            #+#    #+#              #
-#    Updated: 2024/03/31 23:15:56 by kkoval           ###   ########.fr        #
+#    Updated: 2024/04/08 17:38:25 by kkoval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS = main.c start.c render.c color.c mandelbrot.c utils.c
+SRCS = start_fractol.c render.c color.c mandelbrot.c julia.c utils.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -19,7 +19,7 @@ HEADER = fractol.h
 INCS = -I ./Libft -I ./minilibx
 LIBS = -LLibft -lft -Lminilibx -lmlx
 
-#LIBS = -L./ -lft -L./ -lmlx
+IBS = -L./ -lft -L./ -lmlx
 NAME = fractol
 CC = gcc
 RM = rm -f
@@ -34,14 +34,12 @@ all:        ${NAME}
 			make -C ./minilibx 2> /dev/null
 #main.o: main.c	Makefile ${HEADER} ./Libft/libft.a ./minilibx/libmlx.a 
 #	${CC} ${CFLAGS} ${INCS} -c $< -o $@ #${<:.c=.o}
-%.o: %.c	Makefile ${HEADER} ./Libft/libft.a ./minilibx/libmlx.a 
-	echo OBJECTS
-	${CC} ${INCS} -c $< -o $@ #${<:.c=.o}
+%.o: %.c	${HEADER} ./Libft/libft.a ./minilibx/libmlx.a
 
+	${CC} ${CLAFS} ${INCS} -c $< -o $@
 
 ${NAME}:	${OBJS}
-	echo NAME
-	${CC}  ${LIBS} ${OBJS} ${MNLXFLAGS} -o ${NAME}
+	${CC} ${LIBS} ${OBJS} ${MNLXFLAGS} -o ${NAME}
 clean:
 			${RM} ${OBJS}
 			make -C ./Libft clean

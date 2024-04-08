@@ -1,4 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/08 17:32:44 by kkoval            #+#    #+#             */
+/*   Updated: 2024/04/08 17:32:48 by kkoval           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
+
+void    init_mandelbrot(t_mlx *fractal, char* name)
+{
+    fractal->name = name;
+    fractal->type = 1;
+    fractal->x_min = -2;
+	fractal->x_max = 0.6;
+	fractal->y_min = -1.2;
+	fractal->y_max = 1.2;
+}
 
 void	render_mandelbrot(t_mlx *fractal)
 {

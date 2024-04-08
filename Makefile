@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 
-SRCS = main.c
+SRCS = main.c start.c render.c color.c mandelbrot.c utils.c
 
 OBJS = ${SRCS:.c=.o}
 

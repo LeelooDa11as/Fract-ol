@@ -6,12 +6,12 @@
 #    By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/31 20:52:37 by kkoval            #+#    #+#              #
-#    Updated: 2024/04/08 17:38:25 by kkoval           ###   ########.fr        #
+#    Updated: 2024/04/09 19:10:55 by kkoval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS = start_fractol.c render.c color.c mandelbrot.c julia.c utils.c
+SRCS = start_fractol.c render.c color.c mandelbrot.c julia.c utils.c 
 
 OBJS = ${SRCS:.c=.o}
 HEADER = fractol.h
@@ -22,8 +22,8 @@ IBS = -L./ -lft -L./ -lmlx
 NAME = fractol
 CC = gcc
 RM = rm -f
-CFLAGS = #-Wall -Wextra -Werror
-MNLXFLAGS = -framework OpenGL -framework AppKit
+CFLAGS = #-Wall -Wextra -Werror 
+MNLXFLAGS = -framework OpenGL -framework AppKit -g -O3 -fsanitize=address
 
 all:        ${NAME}
 
@@ -33,7 +33,7 @@ all:        ${NAME}
 			make -C ./minilibx 2> /dev/null
 #main.o: main.c	Makefile ${HEADER} ./Libft/libft.a ./minilibx/libmlx.a 
 #	${CC} ${CFLAGS} ${INCS} -c $< -o $@ #${<:.c=.o}
-%.o: %.c	${HEADER} ./Libft/libft.a ./minilibx/libmlx.a
+%.o: %.c	${HEADER} ./minilibx/libmlx.a ./Libft/libft.a
 
 	${CC} ${CFLAGS} ${INCS} -c $< -o $@
 

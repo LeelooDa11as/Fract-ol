@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/09 14:30:23 by kkoval            #+#    #+#             */
+/*   Updated: 2024/04/09 19:30:54 by kkoval           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -85,11 +97,14 @@ int	ft_create_trgb(int r, int g, int b);
 
 //utils
 void	ft_mlx_pixel_put(t_img *img, int x, int y, int color);
+//atof
+static int	ft_ispace(char c);
+double	ft_atof(char *str);
 
 //hooks
 
 int	ft_close(t_mlx *fractal);
 int	key_hook(int keycode, t_mlx *fractal);
-int	mouse_hook(int keycode, t_mlx *fractal);
+int	mouse_hook(int keycode, int x, int y, t_mlx *fractal);
 
 #endif

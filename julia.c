@@ -6,35 +6,34 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:37:17 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/08 17:40:11 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/09 14:52:47 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void    init_julia(t_mlx *fractal, char* name)
+void	init_julia(t_mlx *fractal, char* name)
 {
-    fractal->name = name;
-    fractal->type = 2;
-    fractal->j_input.re = -0.70176; //esto hay que cambiar con double atoi
-    fractal->j_input.im = 0.3842;
-    fractal->x_min = -2;
+	fractal->name = name;
+	fractal->type = 2;
+	fractal->j_input.re = -0.70176; //esto hay que cambiar con double atoi
+	fractal->j_input.im = 0.3842;
+	fractal->x_min = -2;
 	fractal->x_max = 2;
 	fractal->y_min = -2;
 	fractal->y_max = 2;
 }
 
-void	render_julia(t_mlx *fractal)
+void	render_julia(t_mlx *fractal)  //27 lines and too many variable declared.
 {
 	int		y;
 	int		x;
 	int		iter;
-	double 	pixel_dist_y;
-	double 	pixel_dist_x;
+	double	pixel_dist_y;
+	double	pixel_dist_x;
 	t_cmpx	res;
 
 	y = 0;
-
 	pixel_dist_y = pixel_dist(fractal->y_min, fractal->y_max, HEIGHT);
 	pixel_dist_x = pixel_dist(fractal->x_min, fractal->x_max, WIDTH);
 	while (y < HEIGHT)
@@ -57,7 +56,7 @@ void	render_julia(t_mlx *fractal)
 
 int	julia(t_cmpx z, t_cmpx c)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while ((z.re * z.re + z.im * z.im) <= 4 && i < 500)
@@ -68,7 +67,7 @@ int	julia(t_cmpx z, t_cmpx c)
 	return (i);
 }
 
-t_cmpx f_julia(t_cmpx num, t_cmpx c)
+t_cmpx	f_julia(t_cmpx num, t_cmpx c)
 {
 	double	real_num;
 	double	im_num;

@@ -47,6 +47,8 @@ void    fractal_init(t_mlx *fractal)
     //The img_ptr parameter specifies the image to use. 3 parameters should be the addresses of three different valid integers.
     //mlx_get_data_addr ( void *img_ptr, int *bits_per_pixel, int *size_line, int *endian );
     fractal->img.addr = mlx_get_data_addr(fractal->img.img_ptr, &fractal->img.bits_per_pixel, &fractal->img.line_len, &fractal->img.endian);
+    render(fractal);
+
     //events_init(fractal);
     //data_init(fractal);
 
@@ -54,8 +56,52 @@ void    fractal_init(t_mlx *fractal)
 
 //listening events
 
+	void	*mlx; 		//mlx_init(); starts the conection, it is screen connection identifier
+	void	*mlx_wndow; //mlx_new_window(); is window identifier
+	char	*name;		//the text that will be displayed in the window's title
+	int		type;
+	t_cmpx	j_input;
+	double	x_min;
+	double	x_max;
+	double	y_min;
+	double	y_max;
 //hooks data
 
+int	key_hook(int keycode, t_mlx *fractal)
+{
+	printf("Hello from key_hook!\n");
+	return (0);
+}
+
+int	mouse_hook(int keycode, t_mlx *fractal)
+{
+    if (keycode == 4)
+    {
+        fractal->x_min = fractal->x_min * 1.1;
+        fractal->y_min = fractal->y_min * 1.1;
+        fractal->x_max = fractal->x_max * 1.1;
+        fractal->y_max = fractal->y_max * 1.1;
+    }
+    else if (keycode == 5)
+    {
+
+        fractal->x_min = fractal->x_min / 1.1;
+        fractal->y_min = fractal->y_min / 1.1;
+        fractal->x_max = fractal->x_max / 1.1;
+        fractal->y_max = fractal->y_max / 1.1;
+    }
+    render(fractal);
+	return (0);
+}
+
+int	ft_close(t_mlx *fractal)
+{
+	if (fractal->mlx_wndow)
+		mlx_destroy_window(fractal->mlx, fractal->mlx_wndow);
+	if (fractal->img.img_ptr)
+		mlx_destroy_image(fractal->mlx, fractal->img.img_ptr);
+	exit (0);
+}
 
 int main(int argc, char *argv[])
 {
@@ -65,12 +111,8 @@ int main(int argc, char *argv[])
 		init_mandelbrot(&fractal, argv[1]);
 	else if(argc == 4 && !ft_strncmp(argv[1], "julia", 5))
 	{
-		fractal.name = argv[1];
-		fractal.type = 2;
-		//controlar mejor el input que no sean letras y mierdas
-		fractal.j_x = ft_atoi(argv[2]);
-		fractal.j_y = ft_atoi(argv[3]);
-		printf("fractal name is -->%s\n", fractal.name);
+        init_julia(&fractal, argv[1]);
+		//printf("fractal name is -->%s\n", fractal.name);
 	}
 	else
 	{
@@ -81,9 +123,9 @@ int main(int argc, char *argv[])
 		exit (0); // Exit failure
 	}
 	fractal_init(&fractal);
-	render(&fractal);
-	mlx_put_image_to_window(fractal.mlx, fractal.mlx_wndow, fractal.img.img_ptr, 0, 0);
-	//mlx_key_hook(fractal.mlx_wndow, key_hook, &vars);
+    mlx_hook(fractal.mlx_wndow, 17, 0, ft_close, &fractal);
+	mlx_key_hook(fractal.mlx_wndow, key_hook, &fractal);
+	mlx_mouse_hook(fractal.mlx_wndow, mouse_hook, &fractal);
 	mlx_loop(fractal.mlx);
 	return (0);
 }

@@ -14,7 +14,6 @@
 SRCS = start_fractol.c render.c color.c mandelbrot.c julia.c utils.c
 
 OBJS = ${SRCS:.c=.o}
-
 HEADER = fractol.h
 INCS = -I ./Libft -I ./minilibx
 LIBS = -LLibft -lft -Lminilibx -lmlx
@@ -23,7 +22,7 @@ IBS = -L./ -lft -L./ -lmlx
 NAME = fractol
 CC = gcc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 MNLXFLAGS = -framework OpenGL -framework AppKit
 
 all:        ${NAME}
@@ -36,7 +35,7 @@ all:        ${NAME}
 #	${CC} ${CFLAGS} ${INCS} -c $< -o $@ #${<:.c=.o}
 %.o: %.c	${HEADER} ./Libft/libft.a ./minilibx/libmlx.a
 
-	${CC} ${CLAFS} ${INCS} -c $< -o $@
+	${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 	${CC} ${LIBS} ${OBJS} ${MNLXFLAGS} -o ${NAME}

@@ -22,8 +22,8 @@ void	render(t_mlx *fractal)
 {
 	if (fractal->type == 1)
 		render_mandelbrot(fractal);
-	/*else if (fractal->type == 2)
+	else if (fractal->type == 2)
 		render_julia(fractal);
-	mlx_put_image_to_window(fractal->mlx, fractal->mlx_window, fractal->img.img_ptr, 0, 0);*/
+	mlx_put_image_to_window(fractal->mlx, fractal->mlx_wndow, fractal->img.img_ptr, 0, 0);
 }
 

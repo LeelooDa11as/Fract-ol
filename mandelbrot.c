@@ -44,7 +44,7 @@ void	render_mandelbrot(t_mlx *fractal)
 			res.re = scale_from_pixel(x, fractal->x_min, pixel_dist_x);
 			iter = mandelbrot(res);
 			if (iter < 100)
-				ft_mlx_pixel_put(&fractal->img, x, y, ft_color(iter));
+				ft_mlx_pixel_put(&fractal->img, x, y, ft_color_mandelbrot(iter));
 			else
 				ft_mlx_pixel_put(&fractal->img, x, y, BLACK);
 			x++;

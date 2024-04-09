@@ -14,6 +14,13 @@
 #define BLACK       0x000000  // RGB(0, 0, 0)
 #define WHITE       0xFFFFFF  // RGB(255, 255, 255)
 
+typedef	struct	s_cmpx
+{
+	double	re;
+	double	im;
+
+}	t_cmpx;
+
 //image is basically a pixel buffer, we fill it with
 //pixels and push it to our window
 
@@ -35,8 +42,7 @@ typedef	struct	s_mlx
 	void	*mlx_wndow; //mlx_new_window(); is window identifier
 	char	*name;		//the text that will be displayed in the window's title
 	int		type;
-	double	j_x;
-	double	j_y;
+	t_cmpx	j_input;
 	double	x_min;
 	double	x_max;
 	double	y_min;
@@ -48,17 +54,12 @@ typedef	struct	s_mlx
 
 }	t_mlx;
 
-typedef	struct	s_cmpx
-{
-	double	re;
-	double	im;
 
-}	t_cmpx;
 
 
 //Funciones de start
 void    fractal_init(t_mlx *fractal);
-void    init_mandelbrot(t_mlx *fractal, char* name);
+
 
 //render
 double  pixel_dist(double min, double max, int total_pix);
@@ -69,13 +70,26 @@ void	render(t_mlx *fractal);
 void	render_mandelbrot(t_mlx *fractal);
 int	mandelbrot(t_cmpx c);
 t_cmpx f(t_cmpx num, t_cmpx c);
+void    init_mandelbrot(t_mlx *fractal, char* name);
 
+//julia
+void    init_julia(t_mlx *fractal, char* name);
+void	render_julia(t_mlx *fractal);
+int	julia(t_cmpx z, t_cmpx c);
+t_cmpx f_julia(t_cmpx num, t_cmpx c);
 
 //color para cambiar
-int	ft_color(int iter);
+int	ft_color_mandelbrot(int iter);
+int	ft_color_julia(int iter);
 int	ft_create_trgb(int r, int g, int b);
 
 //utils
 void	ft_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+//hooks
+
+int	ft_close(t_mlx *fractal);
+int	key_hook(int keycode, t_mlx *fractal);
+int	mouse_hook(int keycode, t_mlx *fractal);
 
 #endif

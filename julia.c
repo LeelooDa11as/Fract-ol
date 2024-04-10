@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:37:17 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/10 18:51:11 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/10 20:02:01 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	init_julia(t_mlx *fractal, char *x, char *y)
 	}
 	re = ft_atof(x);
 	im = ft_atof(y); 
+	if (re > 2 || re < -2)
 	fractal->name = "julia";
 	fractal->type = 2;
 	fractal->j_input.re = re;

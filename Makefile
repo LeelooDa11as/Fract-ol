@@ -6,7 +6,7 @@
 #    By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/31 20:52:37 by kkoval            #+#    #+#              #
-#    Updated: 2024/04/09 19:10:55 by kkoval           ###   ########.fr        #
+#    Updated: 2024/04/10 16:02:01 by kkoval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ NAME = fractol
 CC = gcc
 RM = rm -f
 CFLAGS = #-Wall -Wextra -Werror 
-MNLXFLAGS = -framework OpenGL -framework AppKit -g -O3 -fsanitize=address
+MNLXFLAGS = -framework OpenGL -framework AppKit -g -O3 #-fsanitize=address
 
 all:        ${NAME}
 

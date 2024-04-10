@@ -6,25 +6,36 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:37:17 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/09 14:52:47 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/10 18:51:11 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	init_julia(t_mlx *fractal, char* name)
+int	init_julia(t_mlx *fractal, char *x, char *y)
 {
-	fractal->name = name;
+	double	re;
+	double	im;
+
+	if (!check_input(x) || !check_input(y))
+	{
+		ft_putstr_fd(NO_NUM_ARG, 2);
+		return(0);
+	}
+	re = ft_atof(x);
+	im = ft_atof(y); 
+	fractal->name = "julia";
 	fractal->type = 2;
-	fractal->j_input.re = -0.70176; //esto hay que cambiar con double atoi
-	fractal->j_input.im = 0.3842;
+	fractal->j_input.re = re;
+	fractal->j_input.im = im;
 	fractal->x_min = -2;
 	fractal->x_max = 2;
 	fractal->y_min = -2;
 	fractal->y_max = 2;
+	return (1);
 }
 
-void	render_julia(t_mlx *fractal)  //27 lines and too many variable declared.
+void	render_julia(t_mlx *fractal)//27 lines and too many variable declared.
 {
 	int		y;
 	int		x;

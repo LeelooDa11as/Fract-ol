@@ -6,13 +6,13 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:29:02 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/09 14:44:43 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:00:30 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	ft_color_mandelbrot(int iter)
+int	ft_color_mandel(int iter)
 {
 	return (ft_create_trgb(iter * 15, 50, 100 + iter * 5));
 }

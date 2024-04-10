@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:34:08 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/09 19:30:11 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/10 18:51:47 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void    fractal_init(t_mlx *fractal)
 
 int key_hook(int keycode, t_mlx *fractal)
 {
-	printf("Hello from key_hook!\n");
+	if (keycode == 53)
+        ft_close(fractal);
 	return (0);
 }
 
@@ -89,26 +90,26 @@ int ft_close(t_mlx *fractal)
 	exit (0);
 }
 
+
 int main(int argc, char *argv[])
 {
 	t_mlx   fractal;
 
-	if (argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 10))
-		init_mandelbrot(&fractal, argv[1]);
-	else if(argc == 4 && !ft_strncmp(argv[1], "julia", 5))
+	if (argc == 2 && !ft_strncmp(argv[1], "mandelbrot", 10) \
+     && ft_strlen(argv[1]) == 10)
+		init_mandelbrot(&fractal);
+	else if (argc == 4 && !ft_strncmp(argv[1], "julia", 5) && \
+    ft_strlen(argv[1]) == 5)
 	{
-        init_julia(&fractal, argv[1]);
-		//printf("fractal name is -->%s\n", fractal.name);
+        if (init_julia(&fractal, argv[2], argv[3]) == 0)
+            return (0);
 	}
 	else
 	{
-		if (argc == 2 && !ft_strncmp(argv[1], "julia", 5))
-			ft_putstr_fd("Please enter enter the 2 numbers if you choose julia", 2);
-		else
-			ft_putstr_fd("Please enter one of the following:\n1. mandelbrot\n2. julia with 2 numbers ", 2);
+        ft_putstr_fd(NO_ARG, 2);
 		exit (0); // Exit failure
-	}
-	fractal_init(&fractal);
+	} 
+    fractal_init(&fractal);
 	mlx_key_hook(fractal.mlx_wndow, key_hook, &fractal);
 	mlx_mouse_hook(fractal.mlx_wndow, mouse_hook, &fractal);
     mlx_hook(fractal.mlx_wndow, 17, 0, ft_close, &fractal);

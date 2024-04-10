@@ -6,33 +6,32 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:44 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/08 17:32:48 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/10 16:15:51 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void    init_mandelbrot(t_mlx *fractal, char* name)
+void	init_mandelbrot(t_mlx *fractal)
 {
-    fractal->name = name;
-    fractal->type = 1;
-    fractal->x_min = -2;
+	fractal->name = "mandelbrot";
+	fractal->type = 1;
+	fractal->x_min = -2;
 	fractal->x_max = 0.6;
 	fractal->y_min = -1.2;
 	fractal->y_max = 1.2;
 }
 
-void	render_mandelbrot(t_mlx *fractal)
+void	render_mandelbrot(t_mlx *fractal) //27 lines too manay variables declared in a function
 {
 	int		y;
 	int		x;
 	int		iter;
-	double 	pixel_dist_y;
-	double 	pixel_dist_x;
+	double	pixel_dist_y;
+	double	pixel_dist_x;
 	t_cmpx	res;
 
 	y = 0;
-
 	pixel_dist_y = pixel_dist(fractal->y_min, fractal->y_max, HEIGHT);
 	pixel_dist_x = pixel_dist(fractal->x_min, fractal->x_max, WIDTH);
 	while (y < HEIGHT)
@@ -44,7 +43,7 @@ void	render_mandelbrot(t_mlx *fractal)
 			res.re = scale_from_pixel(x, fractal->x_min, pixel_dist_x);
 			iter = mandelbrot(res);
 			if (iter < 100)
-				ft_mlx_pixel_put(&fractal->img, x, y, ft_color_mandelbrot(iter));
+				ft_mlx_pixel_put(&fractal->img, x, y, ft_color_mandel(iter));
 			else
 				ft_mlx_pixel_put(&fractal->img, x, y, BLACK);
 			x++;

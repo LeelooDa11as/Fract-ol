@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:30:23 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/09 19:30:54 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/10 18:52:14 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 #define WIDTH	800
 #define	HEIGHT	800
+
+#define NO_ARG "Enter one of the following arguments:\n1. mandelbrot\n2. \
+julia with 2 numeric arguments"
+#define NO_NUM_ARG "You need to enter 2 numeric arguments for julia set\n"
 
 #define BLACK       0x000000  // RGB(0, 0, 0)
 #define WHITE       0xFFFFFF  // RGB(255, 255, 255)
@@ -59,19 +63,15 @@ typedef	struct	s_mlx
 	double	x_max;
 	double	y_min;
 	double	y_max;
-
-	//image
 	t_img	img;
 	//hooks
 
 }	t_mlx;
 
 
-
-
 //Funciones de start
+int		start_fractol(t_mlx *fractal);
 void    fractal_init(t_mlx *fractal);
-
 
 //render
 double  pixel_dist(double min, double max, int total_pix);
@@ -82,16 +82,16 @@ void	render(t_mlx *fractal);
 void	render_mandelbrot(t_mlx *fractal);
 int	mandelbrot(t_cmpx c);
 t_cmpx f(t_cmpx num, t_cmpx c);
-void    init_mandelbrot(t_mlx *fractal, char* name);
+void    init_mandelbrot(t_mlx *fractal);
 
 //julia
-void    init_julia(t_mlx *fractal, char* name);
+int    init_julia(t_mlx *fractal, char *x, char *y);
 void	render_julia(t_mlx *fractal);
 int	julia(t_cmpx z, t_cmpx c);
 t_cmpx f_julia(t_cmpx num, t_cmpx c);
 
 //color para cambiar
-int	ft_color_mandelbrot(int iter);
+int	ft_color_mandel(int iter);
 int	ft_color_julia(int iter);
 int	ft_create_trgb(int r, int g, int b);
 
@@ -100,6 +100,7 @@ void	ft_mlx_pixel_put(t_img *img, int x, int y, int color);
 //atof
 static int	ft_ispace(char c);
 double	ft_atof(char *str);
+int	check_input(char *str);
 
 //hooks
 

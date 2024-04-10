@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:30:52 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/09 19:05:46 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/10 17:46:14 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,27 @@ void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_len + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-/*
+
+int	check_input(char *str)
+{
+	int	point;
+
+	point = 0;
+	if (*str == '\0')
+		return (0);
+	while(*str != '\0')
+	{
+		if (ft_isalpha(*str) == 1)
+			return (0);
+		if (*str == '.')
+			point += 1;
+		if (point > 1)
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 double	ft_atof(char *str)
 {
 	double	res;
@@ -29,25 +49,27 @@ double	ft_atof(char *str)
 	res = 0;
 	sign = 1;
 	div = 1;
-	while (ft_ispace(*str) && *str != '/0')
+	while (ft_ispace(*str) && *str != '\0')
 		str++;
 	if (*str == '-')
-		sig = -1;
+		sign = -1;
 	if (*str == '-' || *str == '+')
 		str++;
-	while(*str >= '0' && *str <= '9' || *str == '.')
+	while (*str != '\0' && ((*str >= '0' && *str <= '9') || *str == '.'))
 	{
-		res = res * 10 + *str - '0';
+		if (*str >= '0' && *str <= '9')
+		{
+			res = res * 10 + *str - '0';
+			div *= 10;
+		}
 		str++;
-		div *= 10;
 	}
-	res = res / div;
-	res = res * sign:
+	res = res / (div / 10);
+	res = res * sign;
 	return (res);
 }
 
- 
-int	ft_ispace(char c)
+static int	ft_ispace(char c)
 {
 	if (c == ' ')
 		return (1);
@@ -63,25 +85,3 @@ int	ft_ispace(char c)
 		return (1);
 	return (0);
 }
-
-int	ft_atoi(const char *str)
-{
-	int	res;
-	int	sig;
-
-
-	res = 0;
-	sig = 1;
-	while (ft_ispace(*str))
-		str++;
-	if (*str == '-')
-		sig = -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		res = res * 10 + *str - '0';
-		str++;
-	}
-	return (res * sig);
-} */

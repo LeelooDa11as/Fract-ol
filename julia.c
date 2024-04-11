@@ -12,19 +12,20 @@
 
 #include "fractol.h"
 
-int	init_julia(t_mlx *fractal, char *x, char *y)
+int	ft_init_julia(t_mlx *fractal, char *x, char *y)
 {
 	double	re;
 	double	im;
 
-	if (!check_input(x) || !check_input(y))
+	if (!ft_check_input(x) || !ft_check_input(y))
 	{
 		ft_putstr_fd(NO_NUM_ARG, 2);
 		return(0);
 	}
 	re = ft_atof(x);
-	im = ft_atof(y); 
-	if (re > 2 || re < -2)
+	im = ft_atof(y);
+	if ((re > 2 || re < -2) || im > 2 || im < -2)  //is it needed?
+		return (0);
 	fractal->name = "julia";
 	fractal->type = 2;
 	fractal->j_input.re = re;
@@ -36,7 +37,7 @@ int	init_julia(t_mlx *fractal, char *x, char *y)
 	return (1);
 }
 
-void	render_julia(t_mlx *fractal)//27 lines and too many variable declared.
+void	ft_render_julia(t_mlx *fractal)//27 lines and too many variable declared.
 {
 	int		y;
 	int		x;
@@ -46,16 +47,16 @@ void	render_julia(t_mlx *fractal)//27 lines and too many variable declared.
 	t_cmpx	res;
 
 	y = 0;
-	pixel_dist_y = pixel_dist(fractal->y_min, fractal->y_max, HEIGHT);
-	pixel_dist_x = pixel_dist(fractal->x_min, fractal->x_max, WIDTH);
+	pixel_dist_y = ft_pixel_dist(fractal->y_min, fractal->y_max, HEIGHT);
+	pixel_dist_x = ft_pixel_dist(fractal->x_min, fractal->x_max, WIDTH);
 	while (y < HEIGHT)
 	{
 		x = 0;
-		res.im = scale_from_pixel(y, fractal->y_min, pixel_dist_y);
+		res.im = ft_scale_from_pixel(y, fractal->y_min, pixel_dist_y);
 		while (x < WIDTH)
 		{
-			res.re = scale_from_pixel(x, fractal->x_min, pixel_dist_x);
-			iter = julia(res, fractal->j_input);
+			res.re = ft_scale_from_pixel(x, fractal->x_min, pixel_dist_x);
+			iter = ft_julia(res, fractal->j_input);
 			if (iter < 500)
 				ft_mlx_pixel_put(&fractal->img, x, y, ft_color_julia(iter));
 			else
@@ -66,20 +67,20 @@ void	render_julia(t_mlx *fractal)//27 lines and too many variable declared.
 	}
 }
 
-int	julia(t_cmpx z, t_cmpx c)
+int	ft_julia(t_cmpx z, t_cmpx c)
 {
 	int	i;
 
 	i = 0;
 	while ((z.re * z.re + z.im * z.im) <= 4 && i < 500)
 	{
-		z = f_julia(z, c);
+		z = ft_f_j(z, c);
 		i++;
 	}
 	return (i);
 }
 
-t_cmpx	f_julia(t_cmpx num, t_cmpx c)
+t_cmpx	ft_f_j(t_cmpx num, t_cmpx c)
 {
 	double	real_num;
 	double	im_num;

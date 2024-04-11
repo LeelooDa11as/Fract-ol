@@ -12,15 +12,7 @@
 
 #include "fractol.h"
 
-void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_len + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-int	check_input(char *str)
+int	ft_check_input(char *str)
 {
 	int	point;
 
@@ -69,7 +61,7 @@ double	ft_atof(char *str)
 	return (res);
 }
 
-static int	ft_ispace(char c)
+int	ft_ispace(char c)
 {
 	if (c == ' ')
 		return (1);

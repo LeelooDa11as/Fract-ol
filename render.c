@@ -13,7 +13,7 @@
 #include "fractol.h"
 
 //shows where at our scale is a specific pixel
-double	pixel_dist(double min, double max, int total_pix)
+double	ft_pixel_dist(double min, double max, int total_pix)
 {
 	double	total_dist;
 	double	dist_per_pixel;
@@ -24,16 +24,24 @@ double	pixel_dist(double min, double max, int total_pix)
 }
 
 //shows where at our scale is a specific pixel
-double	scale_from_pixel(int pixel, double min, double dist_per_pixel)
+double	ft_scale_from_pixel(int pixel, double min, double dist_per_pixel)
 {
 	return ((dist_per_pixel * pixel) + min);
 }
 
-void	render(t_mlx *fractal)
+void	ft_render(t_mlx *fractal)
 {
 	if (fractal->type == 1)
-		render_mandelbrot(fractal);
+		ft_render_mandelbrot(fractal);
 	else if (fractal->type == 2)
-		render_julia(fractal);
+		ft_render_julia(fractal);
 	mlx_put_image_to_window(fractal->mlx, fractal->mlx_wndow, fractal->img.img_ptr, 0, 0);
+}
+
+void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_len + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

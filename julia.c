@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:37:17 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/10 20:02:01 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:18:48 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	ft_init_julia(t_mlx *fractal, char *x, char *y)
 	if (!ft_check_input(x) || !ft_check_input(y))
 	{
 		ft_putstr_fd(NO_NUM_ARG, 2);
-		return(0);
+		return (0);
 	}
 	re = ft_atof(x);
 	im = ft_atof(y);
-	if ((re > 2 || re < -2) || im > 2 || im < -2)  //is it needed?
+	if ((re > 2 || re < -2) || im > 2 || im < -2)
 		return (0);
 	fractal->name = "julia";
 	fractal->type = 2;
@@ -37,16 +37,13 @@ int	ft_init_julia(t_mlx *fractal, char *x, char *y)
 	return (1);
 }
 
-void	ft_render_julia(t_mlx *fractal)//27 lines and too many variable declared.
+void	ft_render_julia(t_mlx *fractal, int x, int y)
 {
-	int		y;
-	int		x;
 	int		iter;
 	double	pixel_dist_y;
 	double	pixel_dist_x;
 	t_cmpx	res;
 
-	y = 0;
 	pixel_dist_y = ft_pixel_dist(fractal->y_min, fractal->y_max, HEIGHT);
 	pixel_dist_x = ft_pixel_dist(fractal->x_min, fractal->x_max, WIDTH);
 	while (y < HEIGHT)

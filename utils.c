@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:30:52 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/10 17:46:14 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:19:21 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_input(char *str)
 	point = 0;
 	if (*str == '\0')
 		return (0);
-	while(*str != '\0')
+	while (*str != '\0')
 	{
 		if (ft_isalpha(*str) == 1)
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:30:37 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/09 14:48:09 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:38:44 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,17 @@ double	ft_scale_from_pixel(int pixel, double min, double dist_per_pixel)
 
 void	ft_render(t_mlx *fractal)
 {
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
 	if (fractal->type == 1)
-		ft_render_mandelbrot(fractal);
+		ft_render_mandelbrot(fractal, x, y);
 	else if (fractal->type == 2)
-		ft_render_julia(fractal);
-	mlx_put_image_to_window(fractal->mlx, fractal->mlx_wndow, fractal->img.img_ptr, 0, 0);
+		ft_render_julia(fractal, x, y);
+	mlx_put_image_to_window(fractal->mlx, fractal->mlx_wndow, \
+	fractal->img.img_ptr, 0, 0);
 }
 
 void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)

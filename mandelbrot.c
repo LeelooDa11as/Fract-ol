@@ -6,7 +6,7 @@
 /*   By: kkoval <kkoval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:32:44 by kkoval            #+#    #+#             */
-/*   Updated: 2024/04/10 16:15:51 by kkoval           ###   ########.fr       */
+/*   Updated: 2024/04/11 15:19:03 by kkoval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,13 @@ void	ft_init_mandelbrot(t_mlx *fractal)
 	fractal->y_max = 1.2;
 }
 
-void	ft_render_mandelbrot(t_mlx *fractal) //27 lines too manay variables declared in a function
+void	ft_render_mandelbrot(t_mlx *fractal, int x, int y)
 {
-	int		y;
-	int		x;
 	int		iter;
 	double	pixel_dist_y;
 	double	pixel_dist_x;
 	t_cmpx	res;
 
-	y = 0;
 	pixel_dist_y = ft_pixel_dist(fractal->y_min, fractal->y_max, HEIGHT);
 	pixel_dist_x = ft_pixel_dist(fractal->x_min, fractal->x_max, WIDTH);
 	while (y < HEIGHT)
@@ -68,7 +65,7 @@ int	ft_mandelbrot(t_cmpx c)
 	return (i);
 }
 
-t_cmpx ft_f(t_cmpx num, t_cmpx c)
+t_cmpx	ft_f(t_cmpx num, t_cmpx c)
 {
 	double	real_num;
 	double	im_num;

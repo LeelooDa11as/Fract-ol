@@ -20,10 +20,10 @@ LIBS = -LLibft -lft -Lminilibx -lmlx
 
 IBS = -L./ -lft -L./ -lmlx
 NAME = fractol
-CC = gcc
+CC = cc
 RM = rm -f
-CFLAGS = #-Wall -Wextra -Werror 
-MNLXFLAGS = -framework OpenGL -framework AppKit -g -O3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -O3 #-fsanitize=address
+MNLXFLAGS = -framework OpenGL -framework AppKit 
 
 all:        ${NAME}
 
@@ -34,7 +34,6 @@ all:        ${NAME}
 #main.o: main.c	Makefile ${HEADER} ./Libft/libft.a ./minilibx/libmlx.a 
 #	${CC} ${CFLAGS} ${INCS} -c $< -o $@ #${<:.c=.o}
 %.o: %.c	${HEADER} ./minilibx/libmlx.a ./Libft/libft.a
-
 	${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 ${NAME}:	${OBJS}

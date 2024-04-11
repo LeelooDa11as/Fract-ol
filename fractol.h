@@ -66,7 +66,7 @@ typedef	struct	s_mlx
 
 //Funciones de start
 int		ft_start_fractol(t_mlx *fractal);
-void	ft_fractal_init(t_mlx *fractal);
+int	ft_fractal_init(t_mlx *fractal);
 int		ft_close(t_mlx *fractal);
 int		ft_key_hook(int keycode, t_mlx *fractal);
 int		ft_mouse_hook(int keycode, int x, int y, t_mlx *fractal);
